@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Next Destination</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #74ebd5, #ACB6E5);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: white;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      max-width: 600px;
+      width: 90%;
+      text-align: center;
+    }
+
+    input, button {
+      padding: 0.75rem;
+      margin-top: 1rem;
+      width: 100%;
+      font-size: 1rem;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .result {
+      margin-top: 2rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .tips {
+      margin-top: 1rem;
+      text-align: left;
+    }
+
+    .tips ul {
+      padding-left: 20px;
+    }
+
+    .tips h3 {
+      margin-bottom: 0.5rem;
+    }
+
+    .mainFooter{
+        position: fixed;
+        color: #011344;
+        bottom: 5px;
+    }
+
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Where Should You Travel Next?</h2>
+    <p>Type what kind of place you'd like (beach, city, cold, adventure, nature, mountains...)</p>
+    <input type="text" id="preference" placeholder="Enter your preferences...">
+    <button onclick="chooseDestination()">Suggest a Destination!</button>
+
+    <div class="result" id="result"></div>
+    <div class="tips" id="tips"></div>
+  </div>
+
+  <script>
+    const destinations = {
+      beach: [
+        {
+          name: "Maldives",
+          tips: [
+            "Bring reef-safe sunscreen 🌞",
+            "Try snorkeling or scuba diving 🤿",
+            "Take a boat tour to nearby islands 🚤"
+          ]
+        },
+        {
+          name: "Cancun",
+          tips: [
+            "Visit the Mayan ruins 🏛️",
+            "Try authentic Mexican street food 🌮",
+            "Pack light clothing – it’s hot! ☀️"
+          ]
+        }
+      ],
+      city: [
+        {
+          name: "Tokyo",
+          tips: [
+            "Get a prepaid transport card (Suica/Pasmo) 🚆",
+            "Explore neighborhoods like Shibuya and Akihabara 🗼",
+            "Try local sushi and ramen 🍜"
+          ]
+        },
+        {
+          name: "New York",
+          tips: [
+            "Get a MetroCard for easy transport 🚇",
+            "See a Broadway show 🎭",
+            "Explore Central Park and the museums 🎨"
+          ]
+        }
+      ],
+      cold: [
+        {
+          name: "Reykjavik",
+          tips: [
+            "Layer your clothing 🧣",
+            "Chase the Northern Lights 🌌",
+            "Soak in the Blue Lagoon 🛁"
+          ]
+        },
+        {
+          name: "Zurich",
+          tips: [
+            "Take a lake cruise 🚢",
+            "Try fondue or Swiss chocolate 🍫",
+            "Walk around the Old Town 🏘️"
+          ]
+        }
+      ],
+      adventure: [
+        {
+          name: "Nepal",
+          tips: [
+            "Pack good hiking boots 🥾",
+            "Visit the Annapurna or Everest region 🏔️",
+            "Respect local customs and culture 🙏"
+          ]
+        },
+        {
+          name: "Machu Picchu",
+          tips: [
+            "Book permits in advance 🎫",
+            "Get acclimated to the altitude ⛰️",
+            "Explore nearby Cusco 🇵🇪"
+          ]
+        }
+      ],
+      nature: [
+        {
+          name: "Iceland",
+          tips: [
+            "Drive the Ring Road 🚗",
+            "See waterfalls and geysers 🌋",
+            "Prepare for sudden weather changes 🌧️"
+          ]
+        },
+        {
+          name: "Amazon Rainforest",
+          tips: [
+            "Bring insect repellent 🦟",
+            "Take a guided jungle tour 🌳",
+            "Respect the ecosystem 🐒"
+          ]
+        }
+      ],
+      mountains: [
+        {
+          name: "Swiss Alps",
+          tips: [
+            "Try skiing or snowboarding 🎿",
+            "Visit charming alpine villages 🏔️",
+            "Take scenic train rides 🚞"
+          ]
+        },
+        {
+          name: "Rocky Mountains",
+          tips: [
+            "Bring layers for changing weather 🌤️",
+            "Spot wildlife like elk or bears 🐻",
+            "Go hiking or camping 🏕️"
+          ]
+        }
+      ]
+    };
+
+    function chooseDestination() {
+      const input = document.getElementById("preference").value.toLowerCase();
+      let matchingPlaces = [];
+
+      for (const [type, places] of Object.entries(destinations)) {
+        if (input.includes(type)) {
+          matchingPlaces = matchingPlaces.concat(places);
+        }
+      }
+
+      const resultDiv = document.getElementById("result");
+      const tipsDiv = document.getElementById("tips");
+
+      if (matchingPlaces.length > 0) {
+        const chosen = matchingPlaces[Math.floor(Math.random() * matchingPlaces.length)];
+
+        resultDiv.textContent = `Your ideal destination is: ${chosen.name}! 🌍✈️`;
+
+        tipsDiv.innerHTML = `
+          <h3>✨ Travel Tips for ${chosen.name}:</h3>
+          <ul>${chosen.tips.map(t => `<li>${t}</li>`).join("")}</ul>
+        `;
+      } else {
+        resultDiv.textContent = "I didn’t catch that 😅 Try using words like beach, city, cold, adventure, mountains, or nature...";
+        tipsDiv.innerHTML = "";
+      }
+    }
+  </script>
+
+  <footer class="mainFooter">
+    <a href="scratch.html">Go Back to Main Page</a>
+  </footer>
+
+</body>
+</html>
+

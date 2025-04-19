@@ -1,0 +1,69 @@
+body{
+    background-color: rgb(248, 248, 248);
+    margin: 1cm;
+    border: 0.2cm solid black;
+    padding: 2cm;
+    padding-top: 0.3cm;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#title{
+    font-size: 75px;
+    font-weight: bolder;
+    text-align: center;
+    color: rgb(6, 6, 150);
+    line-height: 2;
+}
+
+.title-2{
+    font-size: 40px;
+    color: rgb(6, 6, 150);
+}
+
+.images{
+   width: 200px;
+   height: auto;
+   border-radius: 10px;
+   margin-left: auto;
+   margin-right: auto;
+}
+
+.image-text{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    max-width: fit-content;
+}
+
+.text-solo{
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+.index-list{
+    text-align: justify; 
+    font-size: 18px;
+}
+
+.video-complete{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 75vh;
+}
+
+.video-complete iframe {
+    width: 70%;
+    height: 90%;
+    border: none;
+}
+
+.justify{
+    text-align: justify;
+}
+
+.my-4 {
+    margin-top: 1.5rem !important;
+    margin-bottom: 1.5rem !important;
+}
